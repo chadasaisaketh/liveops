@@ -1,7 +1,6 @@
 from django.urls import path
-from .views import login, register
+from .views import list_incidents
 
 urlpatterns = [
-    path("auth/login/", login),
-    path("auth/register/", register),
+    path("incidents/", list_incidents),
 ]
