@@ -20,11 +20,22 @@ INSTALLED_APPS = [
     # third party
     'rest_framework',
     'corsheaders',
+    'channels',
 
     # local
     'incidents',
     'accounts',
 ]
+
+
+ASGI_APPLICATION = "liveops.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    }
+}
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
