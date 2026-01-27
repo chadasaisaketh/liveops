@@ -37,3 +37,20 @@ def resolve_incident(request, id):
     incident.save()
 
     return Response({"message": "Incident resolved"})
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def incidents_view(request):
+
+    # GET → list incidents
+    if request.method == "GET":
+        incidents = Incident.objects.all().order_by("-created_at")
+        serializer = IncidentSerializer(incidents, many=True)
+        return Response(serializer.data)
+
+    # POST → create incident
+    if request.method == "POST":
+        serializer = IncidentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
