@@ -27,11 +27,7 @@ class Incident(models.Model):
         default="OPEN"
     )
 
-    created_by = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="incidents"
-    )
+    
 
     created_at = models.DateTimeField(auto_now_add=True)
 
